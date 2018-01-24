@@ -1,3 +1,5 @@
 <resources>
     <string name="app_name">project</string>
+    <string name="speech_prompt"></string>
+    <string name="speech_not_supported"></string>
 </resources>
