@@ -17,7 +17,7 @@ import static java.lang.Thread.sleep;
 public class MainActivity extends AppCompatActivity {
     TextToSpeech tts;
     String a="Welcome";
-    public ArrayList<String> result=null;
+    private ArrayList<String> speechtotext=null;
     final int REQ_CODE_SPEECH_INPUT =100;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -76,11 +76,11 @@ public class MainActivity extends AppCompatActivity {
             case REQ_CODE_SPEECH_INPUT: {
                 if (resultCode == RESULT_OK && null != data) {
 
-                    result = data
+                    speechtotext = data
                             .getStringArrayListExtra(RecognizerIntent.EXTRA_RESULTS);
                     //txtSpeechInput.setText(result.get(0));
-                    Log.e("Result",result.get(0));
-                    if(result.get(0).equals("contacts")){
+                    Log.e("Result",speechtotext.get(0));
+                    if(speechtotext.get(0).equals("contacts")){
                         Intent ab= new Intent(this,contacts.class);
                         startActivity(ab);
                     }
