@@ -20,6 +20,7 @@ import java.util.Locale;
 public class contacts extends AppCompatActivity {
     final int REQ_CODE_SPEECH_INPUT =100;
     TextToSpeech tts;
+    int a;
     private ArrayList<String> speechtotext=null;
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
