@@ -15,32 +15,30 @@ import java.util.ArrayList;
 import java.util.Locale;
 
 /**
- * Created by Harsh Gupta on 1/26/2018.
+ * Created by MEHUL on 1/26/2018.
  */
 
-public class main extends AppCompatActivity {
+public class mainmenu extends AppCompatActivity {
     final int REQ_CODE_SPEECH_INPUT=100;
-    ArrayList<String> speechtotext=null;
+    private ArrayList<String> speechtotext=null;
     TextToSpeech tts;
-    String a[]={"Start","Touch","Back"};
+    private String a[]={"Music","Contacts"};
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.mai);
+        setContentView(R.layout.first_page);
         tts = new TextToSpeech(this, new TextToSpeech.OnInitListener() {
             public void onInit(int status) {
                 if (status == TextToSpeech.SUCCESS) {
                     tts.setLanguage(Locale.US);
-                    tts.speak("welcome", TextToSpeech.QUEUE_FLUSH, null); //What do I put here?
+                    tts.speak("welcome to main menu", TextToSpeech.QUEUE_FLUSH, null); //What do I put here?
                     SystemClock.sleep(2000);
                     //  for (int j = 0; ; j++) {
                     tts.speak("choose your option", TextToSpeech.QUEUE_FLUSH, null); //What do I put here?
                     SystemClock.sleep(2000);
-                    for (int i = 0; i < 3; i++) {
+                    for (int i = 0; i < 2; i++) {
                         tts.speak(a[i], TextToSpeech.QUEUE_FLUSH, null); //What do I put here?
                         SystemClock.sleep(2000);
                     }
-
-
                 } else {
                     Toast.makeText(getApplicationContext(),
                             "Feature not Supported in Your Device",
@@ -48,6 +46,7 @@ public class main extends AppCompatActivity {
                 }
             }
         });
+        promptSpeechInput();
     }
     public void onDestroy() {
         // Don't forget to shutdown tts!
@@ -75,7 +74,6 @@ public class main extends AppCompatActivity {
     }
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-
         switch (requestCode) {
             case REQ_CODE_SPEECH_INPUT: {
                 if (resultCode == RESULT_OK && null != data) {
