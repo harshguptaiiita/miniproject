@@ -32,7 +32,6 @@ public class frontpage extends AppCompatActivity {
                     tts.setLanguage(Locale.US);
                     tts.speak("welcome", TextToSpeech.QUEUE_FLUSH, null); //What do I put here?
                     SystemClock.sleep(2000);
-                    //  for (int j = 0; ; j++) {
                     tts.speak("choose your option", TextToSpeech.QUEUE_FLUSH, null); //What do I put here?
                     SystemClock.sleep(2000);
                     for (int i = 0; i < 3; i++) {
@@ -40,6 +39,24 @@ public class frontpage extends AppCompatActivity {
                         SystemClock.sleep(2000);
                     }
 
+                    Intent intent = new Intent(RecognizerIntent.ACTION_RECOGNIZE_SPEECH);
+                    intent.putExtra(RecognizerIntent.EXTRA_LANGUAGE_MODEL,
+                            RecognizerIntent.LANGUAGE_MODEL_FREE_FORM);
+                    intent.putExtra(RecognizerIntent.EXTRA_LANGUAGE, Locale.getDefault());
+                    intent.putExtra(RecognizerIntent.EXTRA_PROMPT,
+                            getString(R.string.speech_prompt));
+                    try {
+                        startActivityForResult(intent, REQ_CODE_SPEECH_INPUT);
+                    } catch (ActivityNotFoundException a) {
+                        Toast.makeText(getApplicationContext(),
+                                getString(R.string.speech_not_supported),
+                                Toast.LENGTH_SHORT).show();
+                    }
+
+
+                    // SystemClock.sleep(3000);
+                    //tts.stop();
+                    // }
 
                 } else {
                     Toast.makeText(getApplicationContext(),
@@ -48,8 +65,6 @@ public class frontpage extends AppCompatActivity {
                 }
             }
         });
-        SystemClock.sleep(2000);
-        promptSpeechInput();
     }
     public void onDestroy() {
         // Don't forget to shutdown tts!
