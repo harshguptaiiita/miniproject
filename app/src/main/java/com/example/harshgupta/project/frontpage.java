@@ -31,9 +31,9 @@ public class frontpage extends AppCompatActivity {
                 if (status == TextToSpeech.SUCCESS) {
                     tts.setLanguage(Locale.US);
                     tts.speak("welcome", TextToSpeech.QUEUE_FLUSH, null); //What do I put here?
-                    SystemClock.sleep(2000);
+
                     tts.speak("choose your option", TextToSpeech.QUEUE_FLUSH, null); //What do I put here?
-                    SystemClock.sleep(2000);
+                    SystemClock.sleep(1000);
                     for (int i = 0; i < 3; i++) {
                         tts.speak(a[i], TextToSpeech.QUEUE_FLUSH, null); //What do I put here?
                         SystemClock.sleep(2000);

@@ -103,6 +103,7 @@ public class mainmenu extends AppCompatActivity {
     public static String getMonth()
     {
         SimpleDateFormat sdf = new SimpleDateFormat("MM");
+        Log.e("Kya bolu",sdf.format(Calendar.getInstance().getTime()));
         return sdf.format(Calendar.getInstance().getTime());
     }
 
@@ -113,55 +114,57 @@ public class mainmenu extends AppCompatActivity {
     }
     public static String getMonthName(int month)
     {
+        Log.e("Mont", String.valueOf(month));
         String result = "";
         switch (month)
         {
             case 1:
-                result = context.getResources().getString(R.string.january);
+                result = "january";//context.getResources().getString(R.string.january);
+                Log.e("res",result);
                 break;
 
             case 2:
-                result = context.getResources().getString(R.string.february);
+                result = "february";//context.getResources().getString(R.string.february);
                 break;
 
             case 3:
-                result = context.getResources().getString(R.string.march);
+                result = "march";//context.getResources().getString(R.string.march);
                 break;
 
             case 4:
-                result = context.getResources().getString(R.string.april);
+                result = "april";
                 break;
 
             case 5:
-                result = context.getResources().getString(R.string.may);
+                result = "may";
                 break;
 
             case 6:
-                result = context.getResources().getString(R.string.june);
+                result = "june";
                 break;
 
             case 7:
-                result = context.getResources().getString(R.string.july);
+                result = "july";
                 break;
 
             case 8:
-                result = context.getResources().getString(R.string.august);
+                result = "august";
                 break;
 
             case 9:
-                result = context.getResources().getString(R.string.september);
+                result = "september";
                 break;
 
             case 10:
-                result = context.getResources().getString(R.string.october);
+                result = "october";
                 break;
 
             case 11:
-                result = context.getResources().getString(R.string.november);
+                result = "november";
                 break;
 
             case 12:
-                result = context.getResources().getString(R.string.december);
+                result = "december";
                 break;
         }
         return result;
@@ -172,31 +175,31 @@ public class mainmenu extends AppCompatActivity {
         switch (dayname)
         {
             case 1:
-                result = context.getResources().getString(R.string.sunday);
+                result = "sunday";
                 break;
 
             case 2:
-                result = context.getResources().getString(R.string.monday);
+                result = "monday";
                 break;
 
             case 3:
-                result = context.getResources().getString(R.string.tuesday);
+                result = "tuesday";
                 break;
 
             case 4:
-                result = context.getResources().getString(R.string.wednesday);
+                result = "wednesday";
                 break;
 
             case 5:
-                result = context.getResources().getString(R.string.thursday);
+                result = "thursday";
                 break;
 
             case 6:
-                result = context.getResources().getString(R.string.friday);
+                result = "friday";
                 break;
 
             case 7:
-                result = context.getResources().getString(R.string.saturday);
+                result = "saturday";
                 break;
         }
         return result;
@@ -204,12 +207,18 @@ public class mainmenu extends AppCompatActivity {
     public String status()
     {
         String year = getYear();
-        String month = getMonthName(Integer.valueOf(getMonth()));
-        String day = Integer.toString(Calendar.getInstance().get(Calendar.DAY_OF_MONTH));
-        String dayname = getDayName(Calendar.getInstance().get(Calendar.DAY_OF_WEEK));
-        String hour = Integer.toString(Calendar.getInstance().get(Calendar.HOUR_OF_DAY));
-        String minutes = Integer.toString(Calendar.getInstance().get(Calendar.MINUTE));
+        Log.e("Year",year);
 
+        String month = getMonthName(Integer.valueOf(getMonth()));
+        Log.e("Month",month);
+        String day = Integer.toString(Calendar.getInstance().get(Calendar.DAY_OF_MONTH));
+        Log.e("Date",day);
+        String dayname = getDayName(Calendar.getInstance().get(Calendar.DAY_OF_WEEK));
+        Log.e("Dayname",dayname);
+        String hour = Integer.toString(Calendar.getInstance().get(Calendar.HOUR_OF_DAY));
+        Log.e("Hour",hour);
+        String minutes = Integer.toString(Calendar.getInstance().get(Calendar.MINUTE));
+        Log.e("Minutes",minutes);
         String textStatus = "";
         textStatus=textStatus +
                         getResources().getString(R.string.time)+
@@ -231,6 +240,7 @@ public class mainmenu extends AppCompatActivity {
         return (int)(((float)level / (float)scale) * 100.0f);
     }
     public static boolean deviceIsAPhone()
+
     {
         try
         {
@@ -266,7 +276,7 @@ public class mainmenu extends AppCompatActivity {
             carrier = telephonyManager.getSimOperatorName();
             if (carrier==null | carrier=="")
             {
-                return getResources().getString(R.string.mainCarrierNotAvailable);
+                return "Unknown";
             }
             else
             {
@@ -275,7 +285,7 @@ public class mainmenu extends AppCompatActivity {
         }
         catch(Exception e)
         {
-            return getResources().getString(R.string.mainCarrierNotAvailable);
+            return "Unknown";//getResources().getString(R.string.mainCarrierNotAvailable);
         }
     }
     public static boolean isWifiEnabled()
@@ -315,35 +325,36 @@ public class mainmenu extends AppCompatActivity {
 
         String t="";
         t = t +
-                getResources().getString(R.string.mainBatteryChargedAt) +
+                "The battery is charged at" +
                 String.valueOf(batteryLevel() +
-                        getResources().getString(R.string.mainPercentAndTime));
-
+                        "percent");//getResources().getString(R.string.mainPercentAndTime));
+            Log.e("pehla t ",t);
         if (deviceIsAPhone()==true)
         {
             if (deviceIsConnectedToMobileNetwork()==true)
             {
-                t = t + getResources().getString(R.string.mainCarrierIs) + getCarrier();
+                t = t + "the carrier is" + getCarrier();
+
             }
             else
             {
-                t = t + getResources().getString(R.string.mainNoSignal);
+                t = t + "there is no phone signal";//getResources().getString(R.string.mainNoSignal);
             }
-
+            Log.e("mobile hai",t);
         }
         AudioManager audioManager = (AudioManager)getSystemService(AUDIO_SERVICE);
         switch(audioManager.getRingerMode())
         {
             case AudioManager.RINGER_MODE_NORMAL:
-                t = t + getResources().getString(R.string.mainProfileIsNormal);
+                t = t + " the profile is normal";///getResources().getString(R.string.mainProfileIsNormal);
                 break;
 
             case AudioManager.RINGER_MODE_SILENT:
-                t = t + getResources().getString(R.string.mainProfileIsSilent);
+                t = t + ", the profile is silent";//getResources().getString(R.string.mainProfileIsSilent);
                 break;
 
             case AudioManager.RINGER_MODE_VIBRATE:
-                t = t + getResources().getString(R.string.mainProfileIsVibrate);
+                t = t + ", the profile is vibrate";//getResources().getString(R.string.mainProfileIsVibrate);
                 break;
 
         }
@@ -352,16 +363,16 @@ public class mainmenu extends AppCompatActivity {
             String name = getWifiSSID();
             if (name=="")
             {
-                t = t + getResources().getString(R.string.mainWifiOnWithoutNetwork);
+                t = t + "and the wifi is on and not connected to any wifi network.";//getResources().getString(R.string.mainWifiOnWithoutNetwork);
             }
             else
             {
-                t = t + getResources().getString(R.string.mainWifiOnWithNetwork) + name + ".";
+                t = t + "and the wifi is on and connected to a wifi network named" + name + ".";
             }
         }
         else
         {
-            t = t + getResources().getString(R.string.mainWifiOff);
+            t = t + "and the wifi is off.";//getResources().getString(R.string.mainWifiOff);
         }
         return t;
 
@@ -383,13 +394,21 @@ public class mainmenu extends AppCompatActivity {
                         Intent ab= new Intent(this,contacts.class);
                         startActivity(ab);
                     }
-                    else if(speechtotext.get(0).equals("date")||speechtotext.get(0).equals("time")||speechtotext.get(0).equals("date and time"))
+                    else if(speechtotext.get(0).equals("date")||speechtotext.get(0).equals("dime")||speechtotext.get(0).equals("time")||speechtotext.get(0).equals("date and time"))
                     {
-                        talk(status());
+                        String a=status();
+
+                        Log.e("Time",a);
+
+                        talk(a);
                     }
-                    else if(speechtotext.get(0).equals("status"))
+
+                    else if(speechtotext.get(0).equals("status")||speechtotext.get(0).equals("the status"))
                     {
-                        talk(sta());
+                        String b= sta();
+                        Log.e("Status",b);
+
+                        talk(b);
                     }
                 }
                 break;
