@@ -16,12 +16,16 @@ import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.telephony.TelephonyManager;
 import android.util.Log;
+import android.view.View;
+import android.widget.Button;
 import android.widget.Toast;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Locale;
+
+import static android.content.Context.TELEPHONY_SERVICE;
 
 /**
  * Created by MEHUL on 1/26/2018.
@@ -50,7 +54,6 @@ public class mainmenu extends AppCompatActivity {
                         tts.speak(a[i], TextToSpeech.QUEUE_FLUSH, null); //What do I put here?
                         SystemClock.sleep(2000);
                     }
-
                     Intent intent = new Intent(RecognizerIntent.ACTION_RECOGNIZE_SPEECH);
                     intent.putExtra(RecognizerIntent.EXTRA_LANGUAGE_MODEL,
                             RecognizerIntent.LANGUAGE_MODEL_FREE_FORM);
@@ -244,8 +247,10 @@ public class mainmenu extends AppCompatActivity {
     {
         try
         {
-            if (((TelephonyManager)context.getSystemService(Context.TELEPHONY_SERVICE)).getPhoneType()== TelephonyManager.PHONE_TYPE_NONE)
+            Log.e("Device main","aa gya");
+            if (((TelephonyManager)context.getSystemService(TELEPHONY_SERVICE)).getPhoneType()== TelephonyManager.PHONE_TYPE_NONE)
             {
+
                 return false;
             }
         }
@@ -257,37 +262,7 @@ public class mainmenu extends AppCompatActivity {
         }
         return true;
     }
-    public static boolean deviceIsConnectedToMobileNetwork()
-    {
-        TelephonyManager tm = (TelephonyManager) context.getSystemService(Context.TELEPHONY_SERVICE);
-        switch (tm.getNetworkType())
-        {
-            case TelephonyManager.NETWORK_TYPE_UNKNOWN:
-                return false;
-        }
-        return true;
-    }
-    public String getCarrier()
-    {
-        try
-        {
-            TelephonyManager telephonyManager = ((TelephonyManager) getSystemService(Context.TELEPHONY_SERVICE));
-            String carrier;
-            carrier = telephonyManager.getSimOperatorName();
-            if (carrier==null | carrier=="")
-            {
-                return "Unknown";
-            }
-            else
-            {
-                return carrier;
-            }
-        }
-        catch(Exception e)
-        {
-            return "Unknown";//getResources().getString(R.string.mainCarrierNotAvailable);
-        }
-    }
+
     public static boolean isWifiEnabled()
     {
         try
@@ -329,19 +304,7 @@ public class mainmenu extends AppCompatActivity {
                 String.valueOf(batteryLevel() +
                         "percent");//getResources().getString(R.string.mainPercentAndTime));
             Log.e("pehla t ",t);
-        if (deviceIsAPhone()==true)
-        {
-            if (deviceIsConnectedToMobileNetwork()==true)
-            {
-                t = t + "the carrier is" + getCarrier();
 
-            }
-            else
-            {
-                t = t + "there is no phone signal";//getResources().getString(R.string.mainNoSignal);
-            }
-            Log.e("mobile hai",t);
-        }
         AudioManager audioManager = (AudioManager)getSystemService(AUDIO_SERVICE);
         switch(audioManager.getRingerMode())
         {
@@ -358,6 +321,7 @@ public class mainmenu extends AppCompatActivity {
                 break;
 
         }
+       // Log.e("pehla t2 ",t);
         if (isWifiEnabled())
         {
             String name = getWifiSSID();
@@ -402,6 +366,7 @@ public class mainmenu extends AppCompatActivity {
 
                         talk(a);
                     }
+
 
                     else if(speechtotext.get(0).equals("status")||speechtotext.get(0).equals("the status"))
                     {

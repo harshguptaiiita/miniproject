@@ -4,9 +4,7 @@
     <modules>
       <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
       <module fileurl="file://C:\Users\MEHUL\Desktop\project\miniproject\app\app.iml" filepath="C:\Users\MEHUL\Desktop\project\miniproject\app\app.iml" />
-      <module fileurl="file://F:\PP\miniproject\app\app.iml" filepath="F:\PP\miniproject\app\app.iml" />
       <module fileurl="file://$PROJECT_DIR$/.idea/miniproject.iml" filepath="$PROJECT_DIR$/.idea/miniproject.iml" />
-      <module fileurl="file://F:\PP\miniproject\.idea\miniproject.iml" filepath="F:\PP\miniproject\.idea\miniproject.iml" />
       <module fileurl="file://C:\Users\MEHUL\Desktop\project\miniproject\miniproject.iml" filepath="C:\Users\MEHUL\Desktop\project\miniproject\miniproject.iml" />
     </modules>
   </component>
